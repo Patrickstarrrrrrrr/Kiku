@@ -1,22 +1,21 @@
-# Games-Wabot
+# Kiku - Wabot
 
-<a href="https://github.com/BochilGaming/games-wabot/network/members"><img title="Forks" src="https://img.shields.io/github/forks/BochilGaming/games-wabot?label=Forks&color=blue&style=flat-square"></a>
-<a href="https://github.com/BochilGaming/games-wabot/watchers"><img title="Watchers" src="https://img.shields.io/github/watchers/BochilGaming/games-wabot?label=Watchers&color=green&style=flat-square"></a>
-<a href="https://github.com/BochilGaming/games-wabot/stargazers"><img title="Stars" src="https://img.shields.io/github/stars/BochilGaming/games-wabot?label=Stars&color=yellow&style=flat-square"></a>
-<a href="https://github.com/BochilGaming/games-wabot/graphs/contributors"><img title="Contributors" src="https://img.shields.io/github/contributors/BochilGaming/games-wabot?label=Contributors&color=blue&style=flat-square"></a>
-<a href="https://github.com/BochilGaming/games-wabot/issues"><img title="Issues" src="https://img.shields.io/github/issues/BochilGaming/games-wabot?label=Issues&color=success&style=flat-square"></a>
-<a href="https://github.com/BochilGaming/games-wabot/issues?q=is%3Aissue+is%3Aclosed"><img title="Issues" src="https://img.shields.io/github/issues-closed/BochilGaming/games-wabot?label=Issues&color=red&style=flat-square"></a>
-<a href="https://github.com/BochilGaming/games-wabot/pulls"><img title="Pull Request" src="https://img.shields.io/github/issues-pr/BochilGaming/games-wabot?label=PullRequest&color=success&style=flat-square"></a>
-<a href="https://github.com/BochilGaming/games-wabot/pulls?q=is%3Apr+is%3Aclosed"><img title="Pull Request" src="https://img.shields.io/github/issues-pr-closed/BochilGaming/games-wabot?label=PullRequest&color=red&style=flat-square"></a>
+<a href="https://github.com/Valdimir-Kemii/Kiku/network/members"><img title="Forks" src="https://img.shields.io/github/forks/Valdimir-Kemii/Kiku?label=Forks&color=blue&style=flat-square"></a>
+<a href="https://github.com/Valdimir-Kemii/Kiku/watchers"><img title="Watchers" src="https://img.shields.io/github/watchers/Valdimir-Kemii/Kiku?label=Watchers&color=green&style=flat-square"></a>
+<a href="https://github.com/Valdimir-Kemii/Kiku/stargazers"><img title="Stars" src="https://img.shields.io/github/stars/Valdimir-Kemii/Kiku?label=Stars&color=yellow&style=flat-square"></a>
+<a href="https://github.com/Valdimir-Kemii/Kiku/graphs/contributors"><img title="Contributors" src="https://img.shields.io/github/contributors/Valdimir-Kemii/Kiku?label=Contributors&color=blue&style=flat-square"></a>
+<a href="https://github.com/Valdimir-Kemii/Kiku/issues"><img title="Issues" src="https://img.shields.io/github/issues/Valdimir-Kemii/Kiku?label=Issues&color=success&style=flat-square"></a>
+<a href="https://github.com/Valdimir-Kemii/Kiku/issues?q=is%3Aissue+is%3Aclosed"><img title="Issues" src="https://img.shields.io/github/issues-closed/Valdimir-Kemii/Kiku?label=Issues&color=red&style=flat-square"></a>
+<a href="https://github.com/Valdimir-Kemii/Kiku/pulls"><img title="Pull Request" src="https://img.shields.io/github/issues-pr/Valdimir-Kemii/Kiku?label=PullRequest&color=success&style=flat-square"></a>
+<a href="https://github.com/Valdimir-Kemii/Kiku/pulls?q=is%3Apr+is%3Aclosed"><img title="Pull Request" src="https://img.shields.io/github/issues-pr-closed/Valdimir-Kemii/Kiku?label=PullRequest&color=red&style=flat-square"></a>
 
 
 ## Join Group Diskusi
-[![Grup WhatsApp](https://img.shields.io/badge/WhatsApp%20Group-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)](https://chat.whatsapp.com/GVwpKf83s42D1CnIfDW19G) 
-**NO BOT**
+[![Grup WhatsApp](https://img.shields.io/badge/WhatsApp%20Group-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)](https://chat.whatsapp.com/EHvO9j6JMHb9roHNTvtbdy) 
 
 
 #### Deploy to Heroku
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/BochilGaming/games-wabot)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/Valdimir-Kemii/Kiku)
 
 #### Heroku Buildpack
 | BuildPack | LINK |
@@ -32,11 +31,11 @@ $ pkg install git -y
 $ pkg install nodejs -y
 $ pkg install ffmpeg -y
 $ pkg install imagemagick -y
-$ git clone https://github.com/BochilGaming/games-wabot -b multi-device
-$ cd games-wabot
+$ git clone https://github.com/Valdimir-Kemii/Kiku -b multi-device
+$ cd Kiku
 $ npm i 
 ```
-If error try using yarn instead of npm, see [here](https://github.com/BochilGaming/games-wabot/tree/multi-device#if-npm-install-failed--try--using-yarn-instead-of-npm)
+If error try using yarn instead of npm, see [here](https://github.com/Valdimir-Kemii/Kiku/tree/multi-device#if-npm-install-failed--try--using-yarn-instead-of-npm)
 ```sh
 $ node .
 ```
@@ -74,14 +73,14 @@ apt install wget curl git ffmpeg imagemagick build-essential libcairo2-dev libpa
 
 ---------
 
-[ INSTALLING NODEJS & GAMES-WABOT ]
+[ INSTALLING NODEJS & Kiku ]
 
 ```bash
 ubuntu
 curl -fsSL https://deb.nodesource.com/setup_current.x | sudo -E bash -
 apt install -y nodejs gcc g++ make
-git clone https://github.com/BochilGaming/games-wabot -b multi-device
-cd games-wabot
+git clone https://github.com/Valdimir-Kemii/Kiku -b multi-device
+cd Kiku
 npm install
 npm update
 ```
@@ -96,8 +95,8 @@ npm update
 * Download And Install ImageMagick [`Click Here`](https://imagemagick.org/script/download.php)
 
 ```bash
-git clone https://github.com/BochilGaming/games-wabot -b multi-device
-cd games-wabot
+git clone https://github.com/Valdimir-Kemii/Kiku -b multi-device
+cd Kiku
 npm install
 npm update
 ```
@@ -186,11 +185,11 @@ conn.sendButton(
 )
 
 // example 
-conn.sendButton(m.chat, 'Hello world!', '@BochilGaming', null, [
+conn.sendButton(m.chat, 'Hello world!', '@Valdimir-Kemii', null, [
       ['Hello', 'hello'], ['Bye', 'bye']
 ])
 // example button location
-conn.sendButton(m.chat, 'Hello world!', '@BochilGaming', 'https://github.com/BochilGaming', 
+conn.sendButton(m.chat, 'Hello world!', '@Valdimir-Kemii', 'https://github.com/Valdimir-Kemii', 
       [['Hello', 'hello'], ['Bye', 'bye']], 
       null, { asLocation: true }
 )
@@ -199,7 +198,7 @@ conn.sendButton(m.chat, 'Hello world!', '@BochilGaming', 'https://github.com/Boc
 - Why my plugins not working in this multi-device?
       
 > Please cek syntax error on your plugins. and maybe your script still using CJS
-> This multi-device script use ESM and CJS [(legacy code)](https://github.com/BochilGaming/games-wabot/tree/main) not support yet. Learn more about [ESM](https://nodejs.org/api/esm.html)
+> This multi-device script use ESM and CJS [(legacy code)](https://github.com/Valdimir-Kemii/Kiku/tree/main) not support yet. Learn more about [ESM](https://nodejs.org/api/esm.html)
 
 - How to delete session?
 
@@ -207,7 +206,7 @@ conn.sendButton(m.chat, 'Hello world!', '@BochilGaming', 'https://github.com/Boc
 
 - Why i can't scan qr code?
 
-> if your error like this ```(node:7016) UnhandledPromiseRejectionWarning: TypeError [ERR_INVALID_ARG_TYPE]: The "key" argument must be of type string or an instance of Buffer, TypedArray, DataView, or KeyObject. Received undefined``` you can use [multi-device branch](https://github.com/BochilGaming/games-wabot/tree/multi-device)
+> if your error like this ```(node:7016) UnhandledPromiseRejectionWarning: TypeError [ERR_INVALID_ARG_TYPE]: The "key" argument must be of type string or an instance of Buffer, TypedArray, DataView, or KeyObject. Received undefined``` you can use [multi-device branch](https://github.com/Valdimir-Kemii/Kiku/tree/multi-device)
 
 - How to change owner number?
 
@@ -240,7 +239,7 @@ global.owner = [
 
 #### Special Thanks to
 [![Nurutomo](https://github.com/Nurutomo.png?size=100)](https://github.com/Nurutomo)
-[![BochilGaming](https://github.com/BochilGaming.png?size=100)](https://github.com/BochilGaming)
+[![Valdimir-Kemii](https://github.com/Valdimir-Kemii.png?size=100)](https://github.com/Valdimir-Kemii)
 
 #### Contributor
 [![Adiixyz](https://github.com/Adiixyz.png?size=100)](https://github.com/Adiixyz)
