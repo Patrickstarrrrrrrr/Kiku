@@ -1,41 +1,33 @@
 const delay = time => new Promise(res => setTimeout(res, time))
 
-let handler = m => m
+let handler = async function (m) {
+  if (!m.chat.endsWith('@s.whatsapp.net')) return true;
 
-handler.all = async function (m) {
+  this.menfess = this.menfess ? this.menfess : {};
+  let mf = Object.values(this.menfess).find(v => v.status === false && v.penerima == m.sender);
 
-	if (!m.chat.endsWith('@s.whatsapp.net')) return !0;
+  if (!mf) return true;
 
-	this.menfess = this.menfess ? this.menfess : {}
+  console.log({ text: m.text });
 
-	let mf = Object.values(this.menfess).find(v => v.status === false && v.penerima == m.sender)
+  if (m.text === 'BALAS PESAN' || m.text === '') {
+    if (m.quoted && m.quoted.mtype == 'buttonMessage') {
+      return m.reply("Please type your reply message");
+    }
+  }
 
-	if (!mf) return !0
+  let txt = `Hi *@${mf.dari.split('@')[0]}*, you have received a reply message\n\n◦ *Your Message:* ${mf.pesan}\n◦ *Reply Message:* ${m.text}\n`.trim();
 
-	console.log({ text: m.text })
+  await this.reply(mf.dari, txt, null).then(() => {
+    m.reply('Successfully sent reply!');
+    delay(2000);
+    delete this.menfess[mf.id];
+    return true;
+  });
 
-	if ((m.text === 'BALAS PESAN' || m.text === '') && m.quoted.mtype == 'buttonMessage') return m.reply("Silahkan Ketik Pesan Balasan Mu");
-
-	
-
-	let txt = `Hai kak @${mf.dari.split('@')[0]}, Kamu Menerima Pesan Balasan\n\nPesan Kamu: ⤵️\n${mf.pesan}\n\nPesan Balasannya: ⤵️\n${m.text}\n`.trim();
-
-	await this.reply(mf.dari, txt, null).then(() => {
-
-		m.reply('Berhasil mengirim balasan!')
-
-		delay(2000)
-
-		delete this.menfess[mf.id]
-
-		return !0
-
-		})
-
-	return !0
-
+  return true;
 }
 
+handler.all = handler;
 
-
-module.exports = handler
+module.exports = handler;
