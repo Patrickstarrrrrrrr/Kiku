@@ -1,137 +1,82 @@
-let fetch = require('node-fetch')
-let ytdl = require("ytdl-core")
-let yts = require("yt-search")
+let ytdl = require('ytdl-core')
+let yts = require('yt-search')
+let fs = require('fs')
+let { pipeline } = require('stream')
+let { promisify } = require('util')
+let os = require('os')
 
-const handler = async (m, { conn, command, text, args, usedPrefix }) => {
-let who = m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.fromMe ? conn.user.jid : m.sender
-let ppUrl = await conn.profilePictureUrl(who, 'image').catch((_) => "https://cdn.jsdelivr.net/gh/SazumiVicky/MakeMeow-Storage@main/avatar_contact.png");
-let pp = await (await fetch(ppUrl)).buffer();
-let user = global.db.data.users[who];
-  if (!text) throw `Gunakan contoh *${usedPrefix + command}* naruto blue bird`;
-  conn.youtubePlay = conn.youtubePlay ? conn.youtubePlay : {};
-  conn.sendMessage(m.chat, {
+const streamPipeline = promisify(pipeline);
+
+var handler = async (m, { conn, command, text, usedPrefix }) => {
+  if (!text) throw `Use example ${usedPrefix}${command} naruto blue bird`;
+   conn.sendMessage(m.chat, {
     react: {
       text: '🕒',
       key: m.key,
     }
   });
-  const result = await searchAndDownloadMusic(text);
-  const infoText = `
-*Title:* ${result.title}
-*Description:* ${result.description}
-*Duration:* ${result.duration}
-*Author:* ${result.author}
-*Video URL:* ${result.videoUrl}
-  `;
-
-  const orderedLinks = result.allLinks.map((link, index) => {
-    const sectionNumber = index + 1;
-    const { quality, type, size } = link;
-    return `*${sectionNumber}.* ${type} *${quality}* - ${size}`;
+  try {
+  let search = await yts(text);
+  let vid = search.videos[Math.floor(Math.random() * search.videos.length)];
+  if (!search) throw 'Video Not Found, Try Another Title';
+  let { title, thumbnail, timestamp, views, ago, url } = vid;
+  let wm = '2023 © Sazumi Kemii';
+  
+  const audioStream = ytdl(url, {
+    filter: 'audioonly',
+    quality: 'highestaudio',
   });
-  const orderedLinksText = orderedLinks.join("\n");
-  const fullText = `${infoText}\n\n${orderedLinksText}`;
-  const { key } = await conn.reply(m.chat, fullText, m, {
-      contextInfo: {
-        externalAdReply: {
-          title: `${result.title}`,
-          thumbnailUrl: `${ppUrl}`,
-          mediaUrl: `${result.videoUrl}`,
-          mediaType: 2,
-          renderLargerThumbnail: true
-        }
+
+  // Get the path to the system's temporary directory
+  const tmpDir = os.tmpdir();
+
+  // Create writable stream in the temporary directory
+  const writableStream = fs.createWriteStream(`${tmpDir}/${title}.mp3`);
+
+  // Start the download
+  await streamPipeline(audioStream, writableStream);
+
+  let doc = {
+    audio: {
+      url: `${tmpDir}/${title}.mp3`
+    },
+    mimetype: 'audio/mp4',
+    fileName: `${title}`,
+    contextInfo: {
+      externalAdReply: {
+        showAdAttribution: true,
+        mediaType: 2,
+        mediaUrl: url,
+        title: title,
+        body: '2023 © Sazumi Kemii',
+        sourceUrl: url,
+        thumbnail: await (await conn.getFile(thumbnail)).data
       }
-    });
-  conn.youtubePlay[m.sender] = {
-    result,
-    key,
-    timeout: setTimeout(() => {
-      conn.sendMessage(m.chat, { delete: key });
-      delete conn.youtubePlay[m.sender];
-    }, 60 * 1000),
+    }
   };
-};
 
-handler.before = async (m, { conn }) => {
-  conn.youtubePlay = conn.youtubePlay ? conn.youtubePlay : {};
-  if (m.isBaileys || !(m.sender in conn.youtubePlay)) return;
-  const { result, key, timeout } = conn.youtubePlay[m.sender];
-  if (!m.quoted || m.quoted.id !== key.id || !m.text) return;
-  const choice = m.text.trim();
-  const inputNumber = Number(choice);
-  if (inputNumber >= 1 && inputNumber <= result.allLinks.length) {
-    const selectedUrl = result.allLinks[inputNumber - 1].url;
-    const buffer = await fetchVideoBuffer(decodeURI(selectedUrl));
-    m.reply(buffer)
-    m.reply(`Anda memilih pilihan nomor *${inputNumber}*\n*Klik Dan Download:* ${await shortUrl(selectedUrl)}`);
-    conn.sendMessage(m.chat, { delete: key });
-    clearTimeout(timeout);
-    delete conn.youtubePlay[m.sender];
-  } else {
-    m.reply("Nomor urutan tidak valid. Silakan pilih nomor yang sesuai dengan daftar di atas.\nAntara 1 sampai " + result.allLinks.length);
+  await conn.sendMessage(m.chat, doc, { quoted: m });
+
+  // Delete the audio file
+  fs.unlink(`${tmpDir}/${title}.mp3`, (err) => {
+    if (err) {
+      console.error(`Failed to delete audio file: ${err}`);
+    } else {
+      console.log(`Deleted audio file: ${tmpDir}/${title}.mp3`);
+    }
+  });
+   } catch (e) {
+    console.log(e);
+    m.reply(`Failed :(`);
   }
 };
 
-handler.help = ["play"];
-handler.tags = ["downloader"];
-handler.command = /^(play)$/i;
-handler.limit = true;
+handler.help = ['play'].map((v) => v + ' <query>');
+handler.tags = ['downloader'];
+handler.command = /^play$/i;
+
+handler.exp = 0;
+handler.limit = false;
+
 module.exports = handler
-
-function formatBytes(bytes, decimals = 2) {
-  if (bytes === 0) return "0 B";
-  const k = 1024;
-  const dm = decimals < 0 ? 0 : decimals;
-  const sizes = ["B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
-  const i = Math.floor(Math.log(bytes) / Math.log(k));
-  return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + " " + sizes[i];
-}
-
-async function searchAndDownloadMusic(query) {
-  try {
-    const { videos } = await yts(query);
-    if (!videos.length) return "Maaf, tidak ditemukan hasil video untuk pencarian ini.";
-    const video = videos[0];
-    const videoInfo = await ytdl.getInfo(video.url);
-    const formats = videoInfo.formats;
-    const allLinks = formats.map(format => ({
-      type: format.hasVideo && format.hasAudio ? "Video & Audio" : (format.hasVideo ? "Video" : "Audio"),
-      quality: format.qualityLabel || format.audioQuality || "N/A",
-      url: format.url,
-      size: format.contentLength ? formatBytes(format.contentLength) : "N/A"
-    }));
-
-    const jsonData = {
-      title: video.title,
-      description: video.description,
-      duration: video.duration,
-      author: video.author.name,
-      allLinks: allLinks,
-      videoUrl: video.url,
-      thumbnail: video.thumbnail,
-    };
-
-    return jsonData;
-  } catch (error) {
-    return "Terjadi kesalahan: " + error.message;
-  }
-}
-
-async function shortUrl(url) {
-  let res = await fetch(`https://tinyurl.com/api-create.php?url=${url}`);
-  return await res.text();
-}
-
-async function fetchVideoBuffer() {
-  try {
-    const response = await fetch(url, {
-      method: 'GET',
-      headers: {
-        'Access-Control-Allow-Origin': '*'
-      }
-    });
-    return await response.arrayBuffer();
-  } catch (error) {
-    return null;
-  }
-}
+                                               
