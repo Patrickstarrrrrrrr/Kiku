@@ -25,9 +25,9 @@ let wibh = moment.tz('Asia/Jakarta').format('HH')
 
 // Owner
 global.owner = [
-  ['12024988527'],
-  ['12024988527'],
-  ['12024988527', 'Kemii Hime', 'Kemii Lèarning@gmail.com', true]
+  ['081536907492'],
+  ['081536907492'],
+  ['081536907492', 'Yan', 'pstar9575@gmail.com', true]
 ] // Put your number here
 global.mods = ['-'] // Moderator
 global.prems = ['-'] // Premium
@@ -59,11 +59,11 @@ process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0
 const spack = fs.readFileSync("lib/exif.json")
 const stickerpack = JSON.parse(spack)
 if (stickerpack.spackname == '') {
-  var sticker_name = 'Kikuchanj - Sazumi Kemii'
-  var sticker_author = 'Sazumi Kemii'
+  var sticker_name = 'Matame'
+  var sticker_author = 'Dian'
 } else {
-  var sticker_name = 'Kikuchanj'
-  var sticker_author = 'Sazumi Kemii'
+  var sticker_name = 'Matame'
+  var sticker_author = 'Dian'
 }
 
 const file_exif = "lib/exif.json"
@@ -80,24 +80,24 @@ global.minety = pickRandom(['application/msword', 'application/vnd.ms-excel', 'a
 // Database
 global.version = '1.1.8'
 global.sessionName = 'Kemii'
-global.gcbot = 'https://chat.whatsapp.com/EHvO9j6JMHb9roHNTvtbdy'
+global.gcbot = 'https://chat.whatsapp.com/EyYi7h3RoWTEyaX1lvrZK1'
 global.instagram = 'https://instagram.com/kemii.learning'
-global.namebot = 'Kikuchanj'
+global.namebot = 'Matame'
 global.thumb = 'https://telegra.ph/file/7b5416e93b4423845762d.jpg'
 global.thumbnail = 'https://telegra.ph/file/7b5416e93b4423845762d.jpg'
 global.myfile = fs.readFileSync(`./media/xfile.pdf`)
 global.thumb2 = fs.readFileSync('./media/thumbnail.mp4')
 global.qris = 'https://telegra.ph/file/ff5ff2954de46b9509a3d.jpg'
-global.creator = "12024988527@s.whatsapp.net"
-global.nomorown = '12024988527'
-global.nomerown = '+1 (202) 498-8527'//wajib kaya gitu!!
+global.creator = "081536907492@s.whatsapp.net"
+global.nomorown = '081536907492'
+global.nomerown = '081536907492'//wajib kaya gitu!!
 
 // Sosial Media
-global.sig = 'https://wa.me/12024988527'
+global.sig = 'https://wa.me/081536907492'
 global.syt = '-'
 global.sgh = '-'
-global.sgc = 'https://chat.whatsapp.com/EHvO9j6JMHb9roHNTvtbdy'
-global.swa = 'https://wa.me/12024988527'
+global.sgc = 'https://chat.whatsapp.com/EyYi7h3RoWTEyaX1lvrZK1'
+global.swa = 'https://wa.me/081536907492'
 global.swb = '-' // Link Discord
 global.snh = 'https://nhentai.net/g/365296/' // Link nhentai
 
@@ -118,17 +118,17 @@ global.fpagedoc = '999'
 global.useMulti = false
 
 // Watermark
-global.packname = 'Kikuchanj'
-global.author = '//  Lèarning'
-global.wm = 'Kikuchanj'
-global.wm2 = 'Sazumi Kemii'
+global.packname = 'Matame'
+global.author = '//  Dian'
+global.wm = 'Matame'
+global.wm2 = 'Dian-yan'
 global.bottime = `Time: ${wktuwib}`
 global.botdate = `Date: ${week} ${date}\nTime: ${wktuwib}`
 global.titlebot = `${global.wm}`
 global.danied = 'A K S E S  K A M U  D I  T O L A K!!'
-global.packname = 'Kikuchanj'
-global.author = 'Sazumi Kemii'
-global.nameown = 'Kemii Lèarning'
+global.packname = 'Matame'
+global.author = 'Dian'
+global.nameown = 'Dian'
 global.wait = 'Wait a moment... '
 
 // Tampilan
